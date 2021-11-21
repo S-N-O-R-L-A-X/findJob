@@ -4,7 +4,7 @@
     <el-main>
       <div>
         <Index></Index>      
-        <router-view></router-view>
+        <!-- <router-view></router-view> -->
       </div>
     </el-main>
   </div>

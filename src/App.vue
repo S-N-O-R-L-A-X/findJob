@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <menu class="myMenu"></menu>
+    <!-- <menu class="myMenu"></menu> -->
     <el-main>
       <div>      
         <router-view></router-view>
