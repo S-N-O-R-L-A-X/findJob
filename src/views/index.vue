@@ -1,27 +1,31 @@
 <template>
   <div>
     <div class="indexContain">
-  <div class="cardBox">
-  <el-carousel trigger="click" height="400px" style="position: sticky;">
-        <el-carousel-item v-for="(item, key) in crouselImg" :key="key">
-          <img :src="item.img" class="boxImg" >
-        </el-carousel-item>
-      </el-carousel>
-  </div>
+      <div class="cardBox">
+        <el-carousel trigger="click" height="400px" style="position: sticky;">
+            <el-carousel-item v-for="(item, key) in crouselImg" :key="key">
+              <img :src="item.img" class="boxImg" >
+            </el-carousel-item>
+        </el-carousel>
+      </div>
     </div>
-    <div class="division"><h3>热门企业</h3>
-                          <h3 style="color: #888;font-weight: 400">--- Hot ---</h3></div>
+    
+    <div class="division">
+      <h3>热门企业</h3>
+      <h3 style="color: #888;font-weight: 400">--- Hot ---</h3>
+    </div>
+
     <div class="cardContain">
-  <div class="wrapper-card">
-    <div class="card" v-for="(item, key) in companyList" :key="key">
-      <img :src="item.avatar" class="image" @click="getCompanyDetail(item.id)">
-  </div>
-  </div>
+      <div class="wrapper-card">
+        <div class="card" v-for="(item, key) in companyList" :key="key">
+          <img :src="item.avatar" class="image" @click="getCompanyDetail(item.id)">
+        </div>
+     </div>
     </div>
     <!--推荐-->
     <div class="division" v-if="isLogin">
       <h3>{{isHr ? '推荐候选人': '推荐职位'}}</h3>
-      <h3 style="color: #888;font-weight: 400">---- Hot ----</h3>
+      <!-- <h3 style="color: #888;font-weight: 400">---- Hot ----</h3> -->
     </div>
     <!--推荐候选人--->
     <div class="recommand" v-if="isLogin">
@@ -141,10 +145,7 @@
       </div>
     </div>
     <div class="division"><h3>联系我们</h3>
-      <h3 style="color: #888;font-weight: 400">--- CONTACT ---</h3></div>
-    <div class="footer">
-      <a href="https://github.com/Clairezyw"><img src="../assets/github4.png"><span>https://github.com/Clairezyw</span></a>
-      <a href="https://github.com/stalary"><img src="../assets/github4.png"><span>https://github.com/stalary</span></a>
+      <h3 style="color: #888;font-weight: 400">--- CONTACT ---</h3>
     </div>
   </div>
 </template>

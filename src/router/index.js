@@ -1,11 +1,15 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
-import CommonPage from '../components/common/commonPage.vue'
 import Index from '../views/index.vue'
 import JobInfo from '../views/jobInfo.vue'
 import UserInfo from '../views/userInfo.vue' 
 import New from '../views/new.vue'
+import Login from '../views/login.vue'
+import Register from '../views/register.vue'
+import CompanyDetail from '../views/companyDetail.vue'
+import InfoCenter from '../views/infoCenter.vue'
+import SearchRes from '../views/searchRes.vue'
 
 Vue.use(VueRouter)
 
@@ -34,11 +38,6 @@ const routes = [
     component: Index
   },
   {
-    path:'/commonPage',
-    name: 'CommonPage',
-    component: CommonPage
-  },
-  {
     path:'/userInfo',
     name: 'UserInfo',
     component: UserInfo
@@ -47,7 +46,42 @@ const routes = [
     path:'/new',
     name:'New',
     component: New
-  }
+  },
+  {
+    path:'/login',
+    name:'Login',
+    component: Login
+  },
+  {
+    path:'/register',
+    name:'Register',
+    component: Register
+  },
+  {
+    path:'/register',
+    name:'Register',
+    component: Register
+  },
+  {
+    path:'/infoCenter',
+    name:'InfoCenter',
+    component: InfoCenter
+  },
+  {
+    path:'/userInfo',
+    name:'UserInfo',
+    component: UserInfo
+  },
+  {
+    path:'/companyDetail',
+    name:'CompanyDetail',
+    component: CompanyDetail
+  },
+  {
+    path:'/searchRes',
+    name:'SearchRes',
+    component: SearchRes
+  },
 ]
 
 const router = new VueRouter({

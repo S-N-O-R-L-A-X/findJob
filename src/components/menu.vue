@@ -50,6 +50,182 @@
     </div>
   </header>
 </template>
+
+
+<script>
+import fetch from '../api/fetch'
+
+export default {
+  data () {
+    var checktitle = (rule, value, callback) => {
+      if (!value) {
+        return callback(new Error('职位名称不能为空'))
+      } else {
+        callback()
+      }
+    }
+    var checkintroduce = (rule, value, callback) => {
+      if (!value) {
+        return callback(new Error('职位介绍不能为空'))
+      } else {
+        callback()
+      }
+    }
+    var checkskill = (rule, value, callback) => {
+      if (!value) {
+        return callback(new Error('技术要求不能为空'))
+      } else {
+        callback()
+      }
+    }
+    return {
+      index: 0,
+      count: 0,
+      amount: 0,
+      websocket: null,
+      publishInfo: {
+        hrId: '',
+        title: '',
+        content: '',
+        companyId: '',
+        skillList: [
+          {
+            name: '',
+            weight: 0
+          }
+        ]
+      },
+      publishvisible: false,
+      isHr: false,
+      content: '',
+      companyList: [],
+      msg: '',
+      isShow: true,
+      publishRules: {
+        title: [{validator: checktitle, trigger: 'blur'}],
+        content: [{validator: checkintroduce, trigger: 'blur'}],
+        skillList: [{validator: checkskill, trigger: 'blur'}]
+      }
+    }
+  },
+  created () {
+    this.initWs();
+  },
+  
+  methods: {
+    initWs () {
+      if (sessionStorage.getItem('userId') !== null) {
+        if ('WebSocket' in window) {
+          this.websocket = new WebSocket('ws://pf.stalary.com/push/ws/' + `${sessionStorage.getItem('userId')}`, [])
+        } else {
+          alert('浏览器不支持WebSocket')
+        }
+        this.websocket.onopen = this.openWS
+        this.websocket.onmessage = this.receiveWSMessage
+        this.websocket.onclose = this.closeWS
+      }
+    },
+    openWS (e) {
+      console.log('建立连接')
+    },
+    receiveWSMessage (e) {
+      console.log('接收消息' + e.data)
+      this.count = parseInt(e.data)
+    },
+    closeWS (e) {
+      console.log('关闭连接')
+    },
+    redirect (num) {
+      switch(num){
+        case 1:this.$router.push('index');break;
+        case 2:this.$router.push('userInfo');break;
+        case 3:
+        case 5:
+          this.$router.push('infoCenter');break;
+        case 4:this.$router.push('login');break;
+        // case 5:this.$router.push('infoCenter');break;
+        case 6:this.$router.push('hrView');break;
+        default:break;
+      }
+    },
+    toregister () {
+        this.$router.push({name: 'register'})
+    },
+    getJob (value) {
+      if (value !== null) {
+        localStorage.setItem('content', value)
+      }
+      this.$router.push({name: 'search', params: {count: 1}})
+    },
+    logout () {
+      fetch
+        .logout()
+        .then(res => {
+          if (res.status === 200) {
+            this.$message({
+              message: res.data.msg,
+              type: 'success'
+            })
+            sessionStorage.removeItem('userId')
+            localStorage.removeItem('role')
+            localStorage.removeItem('token')
+            localStorage.removeItem('count')
+            this.websocket.close()
+            this.$router.push({name: 'login'})
+          }
+        })
+        .catch(e => {
+          console.log(e)
+        })
+    },
+    addjob (formName) {
+      this.publishvisible = false
+      this.publishInfo.hrId = sessionStorage.getItem('userId')
+      this.publishInfo.companyId = localStorage.getItem('companyId')
+      this.$refs[formName].validate(valid => {
+        if (valid) {
+          fetch.publishJob(this.publishInfo).then(res => {
+            if (res.status === 200) {
+              this.amount++
+              this.$refs[formName].resetFields()
+            }
+          }).catch(e => {
+            console.log(e)
+          })
+        }
+      })
+    },
+    deleteItem (key) {
+      this.publishInfo.skillList.splice(key, 1)
+    },
+    addskill () {
+      let newskills = {
+        weight: 0,
+        name: ''
+      }
+      this.publishInfo.skillList.push(newskills)
+    },
+    changeStatus() {
+      this.publishvisible = true
+    }
+  },
+  watch: {
+    amount () {
+      location.reload()
+    }
+  },
+  mounted () {
+    if (sessionStorage.getItem('userId')) {
+      this.isShow = false
+    }
+    if (localStorage.getItem('role') === '1') {
+      this.isHr = true
+    }
+  },
+}
+</script>
+
+
 <style>
   html * {
     padding: 0;
@@ -132,177 +308,3 @@
   }
 
 </style>
-<script>/* eslint-disable standard/object-curly-even-spacing */
-
-import fetch from '../../api/fetch'
-
-export default {
-  data () {
-    var checktitle = (rule, value, callback) => {
-      if (!value) {
-        return callback(new Error('职位名称不能为空'))
-      } else {
-        callback()
-      }
-    }
-    var checkintroduce = (rule, value, callback) => {
-      if (!value) {
-        return callback(new Error('职位介绍不能为空'))
-      } else {
-        callback()
-      }
-    }
-    var checkskill = (rule, value, callback) => {
-      if (!value) {
-        return callback(new Error('技术要求不能为空'))
-      } else {
-        callback()
-      }
-    }
-    return {
-      index: 0,
-      count: 0,
-      amount: 0,
-      websocket: null,
-      publishInfo: {
-        hrId: '',
-        title: '',
-        content: '',
-        companyId: '',
-        skillList: [
-          {
-            name: '',
-            weight: 0
-          }
-        ]
-      },
-      publishvisible: false,
-      isHr: false,
-      content: '',
-      companyList: [],
-      msg: '',
-      isShow: true,
-      publishRules: {
-        title: [{validator: checktitle, trigger: 'blur'}],
-        content: [{validator: checkintroduce, trigger: 'blur'}],
-        skillList: [{validator: checkskill, trigger: 'blur'}]
-      }
-    }
-  },
-  created () {
-    this.initWs();
-  },
-  watch: {
-    amount () {
-      location.reload()
-    }
-  },
-  mounted () {
-    if (sessionStorage.getItem('userId')) {
-      this.isShow = false
-    }
-    if (localStorage.getItem('role') === '1') {
-      this.isHr = true
-    }
-  },
-  methods: {
-    initWs () {
-      if (sessionStorage.getItem('userId') !== null) {
-        if ('WebSocket' in window) {
-          this.websocket = new WebSocket('ws://pf.stalary.com/push/ws/' + `${sessionStorage.getItem('userId')}`, [])
-        } else {
-          alert('浏览器不支持WebSocket')
-        }
-        this.websocket.onopen = this.openWS
-        this.websocket.onmessage = this.receiveWSMessage
-        this.websocket.onclose = this.closeWS
-      }
-    },
-    openWS (e) {
-      console.log('建立连接')
-    },
-    receiveWSMessage (e) {
-      console.log('接收消息' + e.data)
-      this.count = parseInt(e.data)
-    },
-    closeWS (e) {
-      console.log('关闭连接')
-    },
-    redirect (num) {
-      if (num === 1) {
-        this.$router.push({name: 'index'})
-      } else if (num === 2) {
-        this.$router.push({name: 'userInfo'})
-      } else if (num === 3) {
-        this.$router.push({name: 'infoCenter'})
-      } else if (num === 4) {
-        this.$router.push({name: 'login'})
-      } else if (num === 5) {
-        this.$router.push({name: 'infoCenter'})
-      } else if (num === 6) {
-        this.$router.push({name: 'hrView'})
-      }
-    },
-    toregister () {
-        this.$router.push({name: 'register'})
-    },
-    getJob (value) {
-      if (value !== null) {
-        localStorage.setItem('content', value)
-      }
-      this.$router.push({name: 'search', params: {count: 1}})
-    },
-    logout () {
-      fetch
-        .logout()
-        .then(res => {
-          if (res.status === 200) {
-            this.$message({
-              message: res.data.msg,
-              type: 'success'
-            })
-            sessionStorage.removeItem('userId')
-            localStorage.removeItem('role')
-            localStorage.removeItem('token')
-            localStorage.removeItem('count')
-            this.websocket.close()
-            this.$router.push({name: 'login'})
-          }
-        })
-        .catch(e => {
-          console.log(e)
-        })
-    },
-    addjob (formName) {
-      this.publishvisible = false
-      this.publishInfo.hrId = sessionStorage.getItem('userId')
-      this.publishInfo.companyId = localStorage.getItem('companyId')
-      this.$refs[formName].validate(valid => {
-        if (valid) {
-          fetch.publishJob(this.publishInfo).then(res => {
-            if (res.status === 200) {
-              this.amount++
-              this.$refs[formName].resetFields()
-            }
-          }).catch(e => {
-            console.log(e)
-          })
-        }
-      })
-    },
-    deleteItem (key) {
-      this.publishInfo.skillList.splice(key, 1)
-    },
-    addskill () {
-      let newskills = {
-        weight: 0,
-        name: ''
-      }
-      this.publishInfo.skillList.push(newskills)
-    },
-    changeStatus() {
-      this.publishvisible = true
-    }
-  }
-}
-</script>

@@ -1,9 +1,6 @@
 <template>
   <div id="app">
-    <el-header>
-      <router-link to='index'>index</router-link>
-      <router-link to='about'>about</router-link>
-    </el-header>
+    <menu class="myMenu"></menu>
     <el-main>
       <div>      
         <router-view></router-view>
@@ -15,12 +12,12 @@
 
 <script>
 // import HelloWorld from './components/HelloWorld.vue'
-
+import Menu from './components/menu.vue'
 export default {
   name: 'app',
-  // components: {
-  //   HelloWorld
-  // }
+  components: {
+    Menu
+  }
 }
 </script>
 

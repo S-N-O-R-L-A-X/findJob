@@ -1,22 +1,22 @@
 <template>
   <div class="home">
-    aa
-    <!-- <img alt="Vue logo" src="../assets/logo.png"> -->
-    
-      <router-link to="/jobInfo"><v-icon>mdi-bus-multiple</v-icon>分析查询</router-link>
-    
-    <!-- <HelloWorld msg="Welcome to Your Vue.js App"/> -->
+    <Menu></Menu>
+    <el-main>
+      <div>
+        <Index></Index>      
+        <router-view></router-view>
+      </div>
+    </el-main>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-// import HelloWorld from '@/components/HelloWorld.vue'
-
+import Menu from '../components/menu.vue'
+import Index from '../views/index.vue'
 export default {
   name: 'Home',
-  // components: {
-  //   HelloWorld
-  // }
+  components: {
+    Menu,Index
+  }
 }
 </script>
