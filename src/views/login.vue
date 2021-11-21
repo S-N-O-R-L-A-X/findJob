@@ -1,7 +1,31 @@
 <template>
   <div class="container">
-    <div class="registerForm">
-    <img src="../assets/logo_1.png" class="logo" @click="backIndex"/>
+    <div>
+      <el-card>
+        <div slot="header" class="clearfix">
+          <span>用户登录</span>
+        </div>
+        <el-form :model="loginInfo" status-icon :rules="rules2" ref="loginInfo" label-width="100px" class="loginForm">
+          <el-form-item  prop="username">
+            
+            <el-input type="text" v-model="loginInfo.username" auto-complete="off" class="loginInput" placeholder="用户名" suffix-icon="iconfont el-icon-s-custom"></el-input>
+          </el-form-item>
+          <el-form-item  prop="password">
+            <el-input type="password" v-model="loginInfo.password" auto-complete="off" class="loginInput" placeholder="密码" suffix-icon="iconfont el-icon-key"></el-input>
+          </el-form-item>
+          <el-form-item>
+            <el-button type="primary" class="loginBtn" @click="submitForm('loginInfo')" >登录</el-button>
+          </el-form-item>
+        </el-form>
+        <div class="footer-tip" @click="toRegister">
+        没有账号？直接注册
+        </div>
+
+      </el-card>
+    </div>
+
+    <!-- <div class="registerForm">
+      <img src="../assets/logo_1.png" class="logo" @click="backIndex"/>
       <el-form :model="loginInfo" status-icon :rules="rules2" ref="loginInfo" label-width="100px" class="loginForm">
         <el-form-item  prop="username">
           <el-input type="text" v-model="loginInfo.username" auto-complete="off" class="loginInput" placeholder="用户名"></el-input>
@@ -14,11 +38,10 @@
         </el-form-item>
       </el-form>
       <div class="footer-tip" @click="toRegister">
-       没有账号？直接注册
-    </div>
-    </div>
-   <!-- <img class="bg_bottom" src="../assets/bg_bottom.png"/>
-  <img class="bg_bottom2" src="../assets/bg_bottom2.png"/> -->
+      没有账号？直接注册
+      </div>
+    </div> -->
+  
   </div>
 </template>
 
@@ -159,7 +182,7 @@
         this.$router.push({name: 'index'})
       },
       toRegister () {
-        this.$router.push({name: 'register'})
+        this.$router.push('register');
       },
       submitForm (formName) {
         this.$refs[formName].validate(valid => {
