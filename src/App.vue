@@ -1,0 +1,36 @@
+<template>
+  <div id="app">
+    <el-header>
+      <router-link to='index'>index</router-link>
+      <router-link to='about'>about</router-link>
+    </el-header>
+    <el-main>
+      <div>      
+        <router-view></router-view>
+      </div>
+    </el-main>
+    
+  </div>
+</template>
+
+<script>
+// import HelloWorld from './components/HelloWorld.vue'
+
+export default {
+  name: 'app',
+  // components: {
+  //   HelloWorld
+  // }
+}
+</script>
+
+<style>
+#app {
+  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
+  margin-top: 60px;
+}
+</style>
