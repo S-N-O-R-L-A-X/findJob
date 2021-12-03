@@ -1,9 +1,6 @@
 <template>
   <div>
-    <el-card class="infocard" v-if="isShow">
-      <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1524746733938&di=9ae24b5205e97c2876b48d3ff26f1c23&imgtype=0&src=http%3A%2F%2Fwww.snlfjx.com%2Fforum%2FSkin%2Fimgs%2Fno-data.png"/>
-      <p>暂时没有消息哦</p>
-    </el-card>
+    <el-alert title="暂时没有消息哦"  type="info"></el-alert>
   <el-card class="infocard" v-for="(item, key) in infoList" :key="key" v-show="!isShow">
     <i class="el-icon-message myMsg" ></i>
     <div class="infoTitle" @click="info(item.content, item.id)">
@@ -84,7 +81,8 @@ export default {
       }).catch(e => {
         console.log(e)
       })
-    }
+    },
+
   }
 }
 </script>

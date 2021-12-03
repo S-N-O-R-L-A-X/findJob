@@ -1,12 +1,6 @@
 <template>
   <div class="home">
-    <Menu></Menu>
-    <el-main>
-      <div>
-        <Index></Index>      
-        <!-- <router-view></router-view> -->
-      </div>
-    </el-main>
+    
   </div>
 </template>
 

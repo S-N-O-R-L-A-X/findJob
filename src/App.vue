@@ -1,17 +1,14 @@
 <template>
   <div id="app">
-    <!-- <menu class="myMenu"></menu> -->
+    <Menu></Menu>
     <el-main>
-      <div>      
-        <router-view></router-view>
-      </div>
-    </el-main>
-    
+      <router-view></router-view>
+    </el-main> 
+        
   </div>
 </template>
 
 <script>
-// import HelloWorld from './components/HelloWorld.vue'
 import Menu from './components/menu.vue'
 export default {
   name: 'app',
@@ -28,6 +25,6 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+
 }
 </style>

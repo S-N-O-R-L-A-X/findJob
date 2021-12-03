@@ -25,13 +25,8 @@
         </el-form-item>
         <div v-if="isHr">
           <el-form-item prop="company">
-             <el-autocomplete
-              class="choose"
-              v-model="hrInfo.company"
-              :fetch-suggestions="querySearch"
-              placeholder="请输入就职公司"
-              @select="handleSelect"
-            ></el-autocomplete>
+             <el-autocomplete class="choose" v-model="hrInfo.company" :fetch-suggestions="querySearch"
+              placeholder="请输入就职公司" @select="handleSelect"></el-autocomplete>
           </el-form-item>
            <div @click="changeClick" class="tips" v-if="tipsShow">没有您所在的公司？请添加</div>
         </div>
@@ -321,7 +316,7 @@ export default {
     },
 
     toLogin() {
-      this.$router.push({name: "login"})
+      this.$router.push("/login");
     },
 
     // 公司查询
