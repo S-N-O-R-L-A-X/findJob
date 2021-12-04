@@ -1,14 +1,6 @@
 <template>
   <div>
-    <div class="indexContain">
-      <div class="cardBox">
-        <el-carousel trigger="click" height="400px" style="position: sticky;">
-            <el-carousel-item v-for="(item, key) in crouselImg" :key="key">
-              <img :src="item.img" class="boxImg" >
-            </el-carousel-item>
-        </el-carousel>
-      </div>
-    </div>
+    <advertisement></advertisement>
     
     <div class="division">
       <h3>热门企业</h3>
@@ -18,7 +10,7 @@
     <div class="cardContain">
       <div class="wrapper-card">
         <div class="card" v-for="(item, key) in companyList" :key="key">
-          <img :src="item.avatar" class="image" @click="getCompanyDetail(item.id)">
+          <img :src="item.logoUrl" class="image" @click="getCompanyDetail(item.id)">
         </div>
      </div>
     </div>
@@ -151,256 +143,14 @@
     </div>
   </div>
 </template>
-<style>
-@import "../css/index.css";
-@import "../assets/Animate/animate.min.css";
-body {
-  background: #ededed;
-}
 
-.myMenu {
-  position: sticky;
-  top: 0;
-  z-index: 100;
-}
-
-.indexContain {
-  width: 100%;
-  height: 100%;
-  border:1px solid #ededed;
-  background: #fff;
-}
-
-.cardContain {
-  width: 100%;
-  height: 100%;
-  background: #fff;
-}
-
-.newsContain {
-  padding-top: 1px;
-  width: 100%;
-  height: 100%;
-  background: #fff;
-}
-
-.picContain {
-  margin-right: 10px;
-  perspective: 1000px;
-}
-
-.picContain:hover .flipper, .picContain.hover .flipper{
-  transform: rotateY(180deg);
-}
-
-.picContain, .itemPic, .back{
-  width: 80px;
-  height: 80px;
-}
-
-.flipper {
-  transition: 0.6s;
-  transform-style:preserve-3d;
-  position: relative;
-}
-
-.newsItem {
-  display: flex;
-  justify-content: flex-start;
-  width: 1200px;
-  margin: auto;
-  height: 114px;
-  text-align: left;
-  color: #5a5a5a;
-  font-weight: 500;
-  padding-top: 15px;
-  border-bottom: 1px solid #ededed;
-}
-
-.itemPic, .back {
-  position: absolute;
-  top: 0;
-  left: 0;
-  backface-visibility: hidden;
-  background: #cc0000;
-  text-align: center;
-  color: white;
-  font-weight: 500;
-  line-height: 80px;
-  white-space: nowrap;
-}
-
-.itemPic {
-  z-index: 2;
-}
-
-.back {
-  transform: rotateY(180deg);
-}
-
-.footer {
-  width: 100%;
-  height: 100px;
-  background: black;
-  padding-top:20px
-}
-
-.footer a {
-  color: white;
-  text-decoration: none;
-}
-
-.aboutus  {
-  width: 100%;
-  height: 500px;
-  background: url("https://upload-images.jianshu.io/upload_images/9381131-fd2872c9d933b2de.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240") no-repeat;
-  background-size: 100% 100%;
-  filter: grayscale(70%);
-  opacity: 0.7;
-  color: white;
-  font-weight: 600;
-  padding-top: 60px;
-}
-
-.aboutus p{
-  margin-top: 30px;
-  font-size: 18px;
-}
-
-#aboutusInfo {
-  margin-top: 80px;
-  animation-delay: 1s
-}
-
-.cardBox {
-  position: relative;
-  width: 1200px;
-  margin: 20px auto 30px auto;
-  box-shadow: 0 10px 15px #888;
-  border-radius: 6px;
-}
-
-.wrapper-card {
-  width: 1200px;
-  height:1000px;
-  margin: 30px auto auto auto;
-  padding-top: 30px;
-}
-
-.wrapper-card .card {
-  color: #07111B;
-  font-size: 16px;
-  width: 336px;
-  height: 243px;
-  float: left;
-  margin: 30px;
-  border-radius: 6px;
-}
-
-.wrapper-card .card:hover {
-  transform: translateY(-5px);
-  transition: 3ms;
-  box-shadow: 5px 5px 10px #888;
-}
-
-.wrapper-card .image {
-  border-radius: 6px 6px 0 0;
-  width: 100%;
-  height: 100%;
-  margin-bottom: 20px;
-  border-radius: 6px;
-}
-
-.boxImg {
-  width: 100%;
-  height: 100%;
-  border-radius: 6px;
-}
-
-.division {
-  width: 100%;
-  margin: 30px  auto;
-  text-align: center;
-  padding-left: 10px;
-   color: #5a5a5a;
-}
-
-.footer img{
-  width:25px;
-  height: 25px;
-  margin-right: 10px
-}
-
-.footer span {
-  margin-right: 20px;
-}
-
-.recommand {
-  width: 100%;
-  height: 100%;
-  background: #fff;
-  padding: 36px 0;
-  font-size: 18px;
-}
-
-.recommandList {
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  color: #5a5a5a;
-  font-weight: 500;
-}
-
-.recommandInfo {
-  margin-left: 16px;
-}
-
-.recommandInfo p {
-  margin-bottom: 6px;
-}
-
-.el-progress__text {
-  font-size: 16px !important;
-  text-align: center !important;
-}
-
-.el-carousel-item {
-  display: flex;
-  justify-content: space-around;
-}
-
-.el-carousel {
-  width: 1200px;
-  margin: 0 auto;
-}
-
-.recommandJob {
-  border: 1px solid #ebebeb;
-  text-align: left;
-  color: #fff;
-  line-height: 30px;
-  background: linear-gradient(#948E99, #2E1437);
-  border-radius: 4px;
-  width: 150px;
-  height: 180px;
-  padding: 20px 10px 10px;
-  font-weight: bold;
-}
-
-.mytable {
-  width: 100%;
-  height: 700px;
-}
-
-.progress2 {
-  width: 182px;
-  border: 0;
-}
-
-</style>
 <script>
-import fetch from '../api/fetch'
+import fetch from '../api/fetch';
+import advertisement from '../components/advertisement';
+
+
 export default {
+  components:{advertisement},
   data () {
     return {
       crouselImg: [
@@ -537,3 +287,236 @@ export default {
 
 }
 </script>
+
+
+<style>
+@import "../css/index.css";
+@import "../assets/Animate/animate.min.css";
+
+body {
+  background: #ededed;
+}
+
+.myMenu {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+
+
+.cardContain {
+  width: 100%;
+  height: 100%;
+  background: #fff;
+}
+
+.newsContain {
+  padding-top: 1px;
+  width: 100%;
+  height: 100%;
+  background: #fff;
+}
+
+.picContain {
+  margin-right: 10px;
+  perspective: 1000px;
+}
+
+.picContain:hover .flipper, .picContain.hover .flipper{
+  transform: rotateY(180deg);
+}
+
+.picContain, .itemPic, .back{
+  width: 80px;
+  height: 80px;
+}
+
+.flipper {
+  transition: 0.6s;
+  transform-style:preserve-3d;
+  position: relative;
+}
+
+.newsItem {
+  display: flex;
+  justify-content: flex-start;
+  width: 1200px;
+  margin: auto;
+  height: 114px;
+  text-align: left;
+  color: #5a5a5a;
+  font-weight: 500;
+  padding-top: 15px;
+  border-bottom: 1px solid #ededed;
+}
+
+.itemPic, .back {
+  position: absolute;
+  top: 0;
+  left: 0;
+  backface-visibility: hidden;
+  background: #cc0000;
+  text-align: center;
+  color: white;
+  font-weight: 500;
+  line-height: 80px;
+  white-space: nowrap;
+}
+
+.itemPic {
+  z-index: 2;
+}
+
+.back {
+  transform: rotateY(180deg);
+}
+
+.footer {
+  width: 100%;
+  height: 100px;
+  background: black;
+  padding-top:20px
+}
+
+.footer a {
+  color: white;
+  text-decoration: none;
+}
+
+.aboutus  {
+  width: 100%;
+  height: 500px;
+  background: url("https://upload-images.jianshu.io/upload_images/9381131-fd2872c9d933b2de.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240") no-repeat;
+  background-size: 100% 100%;
+  filter: grayscale(70%);
+  opacity: 0.7;
+  color: white;
+  font-weight: 600;
+  padding-top: 60px;
+}
+
+.aboutus p{
+  margin-top: 30px;
+  font-size: 18px;
+}
+
+#aboutusInfo {
+  margin-top: 80px;
+  animation-delay: 1s
+}
+
+
+.wrapper-card {
+  width: 1200px;
+  height:1000px;
+  margin: 30px auto auto auto;
+  padding-top: 30px;
+}
+
+.wrapper-card .card {
+  color: #07111B;
+  font-size: 16px;
+  width: 336px;
+  height: 243px;
+  float: left;
+  margin: 30px;
+  border-radius: 6px;
+}
+
+.wrapper-card .card:hover {
+  transform: translateY(-5px);
+  transition: 3ms;
+  box-shadow: 5px 5px 10px #888;
+}
+
+.wrapper-card .image {
+  border-radius: 6px 6px 0 0;
+  width: 100%;
+  height: 100%;
+  margin-bottom: 20px;
+  border-radius: 6px;
+}
+
+
+.division {
+  width: 100%;
+  margin: 30px  auto;
+  text-align: center;
+  padding-left: 10px;
+   color: #5a5a5a;
+}
+
+.footer img{
+  width:25px;
+  height: 25px;
+  margin-right: 10px
+}
+
+.footer span {
+  margin-right: 20px;
+}
+
+.recommand {
+  width: 100%;
+  height: 100%;
+  background: #fff;
+  padding: 36px 0;
+  font-size: 18px;
+}
+
+.recommandList {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  color: #5a5a5a;
+  font-weight: 500;
+}
+
+.recommandInfo {
+  margin-left: 16px;
+}
+
+.recommandInfo p {
+  margin-bottom: 6px;
+}
+
+.el-progress__text {
+  font-size: 16px !important;
+  text-align: center !important;
+}
+
+.el-carousel-item {
+  display: flex;
+  justify-content: space-around;
+}
+
+.el-carousel {
+  width: 1200px;
+  margin: 0 auto;
+}
+
+.recommandJob {
+  border: 1px solid #ebebeb;
+  text-align: left;
+  color: #fff;
+  line-height: 30px;
+  background: linear-gradient(#948E99, #2E1437);
+  border-radius: 4px;
+  width: 150px;
+  height: 180px;
+  padding: 20px 10px 10px;
+  font-weight: bold;
+}
+
+.mytable {
+  width: 100%;
+  height: 700px;
+}
+
+.progress2 {
+  width: 182px;
+  border: 0;
+}
+
+</style>

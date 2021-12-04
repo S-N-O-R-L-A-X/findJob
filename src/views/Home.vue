@@ -1,16 +1,16 @@
 <template>
   <div class="home">
-    
+    <Carousel></Carousel>
   </div>
 </template>
 
 <script>
 import Menu from '../components/menu.vue'
-import Index from '../views/index.vue'
+import Carousel from './Carousel.vue'
 export default {
   name: 'Home',
   components: {
-    Menu,Index
+    Menu,Carousel
   }
 }
 </script>

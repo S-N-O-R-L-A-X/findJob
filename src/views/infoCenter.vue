@@ -1,21 +1,21 @@
 <template>
   <div>
     <el-alert title="暂时没有消息哦"  type="info"></el-alert>
-  <el-card class="infocard" v-for="(item, key) in infoList" :key="key" v-show="!isShow">
-    <i class="el-icon-message myMsg" ></i>
-    <div class="infoTitle" @click="info(item.content, item.id)">
-      <p>{{item.title}}</p>
-    </div>
-   <p class="time">{{item.createTime}}</p>
-     <el-tag v-if="item.readState" class="haveRead">已读</el-tag>
-      <el-tag v-else type="warning" class="haveRead" >未读</el-tag>
-  </el-card>
-  <el-dialog  title="系统通知" :visible.sync="dialogVisible" width="30%" >
-  <span>{{content}}</span>
-  <span slot="footer" class="dialog-footer">
-    <el-button type="primary" @click="confirmClick">确定</el-button>
-  </span>
-</el-dialog>
+    <el-card class="infocard" v-for="(item, key) in infoList" :key="key" v-show="!isShow">
+      <i class="el-icon-message myMsg" ></i>
+      <div class="infoTitle" @click="info(item.content, item.id)">
+        <p>{{item.title}}</p>
+      </div>
+    <p class="time">{{item.createTime}}</p>
+    <el-tag v-if="item.readState" class="haveRead">已读</el-tag>
+    <el-tag v-else type="warning" class="haveRead" >未读</el-tag>
+    </el-card>
+    <el-dialog  title="系统通知" :visible.sync="dialogVisible" width="30%" >
+      <span>{{content}}</span>
+      <span slot="footer" class="dialog-footer">
+        <el-button type="primary" @click="confirmClick">确定</el-button>
+      </span>
+    </el-dialog>
   </div>
 </template>
 

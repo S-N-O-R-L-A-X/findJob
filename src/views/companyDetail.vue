@@ -1,23 +1,23 @@
 <template>
  <div>
-<el-card class="companycard" style="height: 180px">
-  <img :src="detail.avatar" class="avatar">
-  <div class="introduce">
-  <p class="title">{{detail.name}}</p>
-  <p>{{detail.introduce}}</p>
-  <p>{{detail.address}}<span>|</span>{{detail.scale}}<span>|</span>{{detail.type}}</p>
-  </div>
-</el-card>
-<el-card class="companycard">
-  <div class="job">招聘信息</div>
-  <p v-if="!isShow" class="nojob">暂时没有招聘信息哦</p>
-    <div v-if="isShow"  v-for="(item, key) in recruit" :key="key">
-      <div class="jobinfo" @click="getJobDetail(item.id)">
-      <p class="jobname">{{item.title}}</p>
-      <p><i class="el-icon-location"></i>{{detail.address}}<span>|</span>{{detail.scale}}<span>|</span>{{detail.type}}</p>
+    <el-card class="companycard" style="height: 180px">
+      <img :src="detail.avatar" class="avatar">
+      <div class="introduce">
+      <p class="title">{{detail.name}}</p>
+      <p>{{detail.introduce}}</p>
+      <p>{{detail.address}}<span>|</span>{{detail.scale}}<span>|</span>{{detail.type}}</p>
       </div>
-  </div>
-</el-card>
+    </el-card>
+    <el-card class="companycard">
+      <div class="job">招聘信息</div>
+      <p v-if="!isShow" class="nojob">暂时没有招聘信息哦</p>
+        <div v-if="isShow"  v-for="(item, key) in recruit" :key="key">
+          <div class="jobinfo" @click="getJobDetail(item.id)">
+          <p class="jobname">{{item.title}}</p>
+          <p><i class="el-icon-location"></i>{{detail.address}}<span>|</span>{{detail.scale}}<span>|</span>{{detail.type}}</p>
+          </div>
+      </div>
+    </el-card>
   </div>
 </template>
 <style>
