@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
-import Carousel from '../views/Carousel.vue'
+import Index from '../views/Index.vue'
 import JobInfo from '../views/jobInfo.vue'
 import UserInfo from '../views/userInfo.vue' 
 import New from '../views/new.vue'
@@ -33,9 +33,9 @@ const routes = [
     component: JobInfo
   },
   {
-    path: '/carousel',
-    name: 'Carousel',
-    component: Carousel
+    path: '/index',
+    name: 'Index',
+    component: Index
   },
   {
     path:'/userInfo',

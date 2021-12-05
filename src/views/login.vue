@@ -8,7 +8,7 @@
         <el-form :model="loginInfo" status-icon :rules="rules2" ref="loginInfo" label-width="100px" class="loginForm">
           <el-form-item  prop="username">
             
-            <el-input type="text" v-model="loginInfo.username" auto-complete="off" class="loginInput" placeholder="用户名" suffix-icon="iconfont el-icon-s-custom"></el-input>
+            <el-input type="text" v-model="loginInfo.username" auto-complete="off" class="loginInput" placeholder="输入用户名或手机密码" suffix-icon="iconfont el-icon-s-custom"></el-input>
           </el-form-item>
           <el-form-item  prop="password">
             <el-input type="password" v-model="loginInfo.password" auto-complete="off" class="loginInput" placeholder="密码" suffix-icon="iconfont el-icon-key"></el-input>

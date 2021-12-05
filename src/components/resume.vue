@@ -4,11 +4,13 @@
       <span>创建简历让更多的人发现你</span>
       <el-button class="createResume" @click="dialogFormVisible = true">新建简历</el-button>
     </div>
+
     <el-card v-if="haveResume" class="resumeCard">
       <p>个人简历-{{resumeList.name}}</p>
-      <el-button class="checkBtn" @click="resumeFormVisible = true">查看简历</el-button>
+      <el-button class="checkBtn" @click="resumeFormVisible=true">查看简历</el-button>
     </el-card>
-    <el-dialog title="我的简历" :visible.sync="resumeFormVisible" class="myDialog">
+
+    <el-dialog title="我的简历" :visible.sync="resumeFormVisible" :modal-append-to-body="false" class="myDialog">
       <div v-if="!isChange">
         <table border="1" cellspacing="0" style="border-color:#ededed" class="mytable">
           <tr>
@@ -69,6 +71,7 @@
         </table>
         <el-button class="modBtn" @click="()=>{isChange = !isChange}">修改简历</el-button>
       </div>
+
       <el-form :model="resumeList" status-icon :rules="resumerules" ref="resumeInfo" label-width="100px"
                class="resumeInfoForm" v-if="isChange">
         <el-form-item label="姓名" prop="name">
@@ -128,29 +131,34 @@
         </el-form-item>
       </el-form>
     </el-dialog>
-    <el-dialog title="新建简历" :visible.sync="dialogFormVisible" class="myDialog">
-      <el-form :model="resumeList" status-icon :rules="resumerules" ref="resumeInfo" label-width="100px"
+
+    <el-dialog title="新建简历" :visible.sync="dialogFormVisible" :modal-append-to-body="false" class="myDialog">
+      <el-form :model="resumeList" status-icon :rules="resumerules" ref="resumeInfo" label-width="120px"
                class="resumeInfoForm">
+       
         <el-form-item label="姓名" prop="name">
           <el-input v-model="resumeList.name" auto-complete="off"></el-input>
         </el-form-item>
-        <el-form-item label="性别" prop="sex">
+      
+        <el-form-item label="性别" prop="sex" style="display:flex">
           <el-select v-model="resumeList.sex" placeholder="请选择性别" style="width: 100%">
             <el-option label="男" value="男"></el-option>
             <el-option label="女" value="女"></el-option>
           </el-select>
         </el-form-item>
-        <el-form-item label="年龄" prop="age">
-          <el-input v-model="resumeList.age"></el-input>
+  
+        
+        <el-form-item label="年龄" prop="age" style="display:flex">
+          <el-input v-model="resumeList.age" ></el-input>
         </el-form-item>
-        <el-form-item label="地址" prop="address">
+        <el-form-item label="地址" prop="address" style="display:flex">
           <el-input v-model="resumeList.address"></el-input>
         </el-form-item>
-        <el-form-item label="我的简介" prop="introduce">
+        <el-form-item label="我的简介" prop="introduce" style="display:flex">
           <el-input type="textarea" :autosize="{ minRows: 4, maxRows: 6}" v-model="resumeList.introduce"></el-input>
         </el-form-item>
-        <el-form-item label="毕业年份" prop="endTime">
-          <el-select v-model="resumeList.endTime" style="width: 100%">
+        <el-form-item label="毕业年份" prop="endTime" style="display:flex">
+          <el-select v-model="resumeList.endTime" >
             <el-option
               v-for="item in options"
               :key="item.value"
@@ -159,15 +167,16 @@
             </el-option>
           </el-select>
         </el-form-item>
-        <el-form-item label="学校" prop="school">
+        <el-form-item label="学校" prop="school" style="display:flex">
           <el-input v-model="resumeList.school"></el-input>
         </el-form-item>
-        <el-form-item label="手机号" prop="phone">
+        <el-form-item label="手机号" prop="phone" style="display:flex">
           <el-input v-model="resumeList.phone"></el-input>
         </el-form-item>
         <el-form-item label="邮箱" prop="email">
           <el-input v-model="resumeList.email"></el-input>
         </el-form-item>
+
         <el-form-item label="技术栈" prop="skills">
           <el-button @click="addSkill()" class="addbtn">添加</el-button>
           <div class="skillContain">
@@ -183,13 +192,13 @@
             </div>
           </div>
         </el-form-item>
-        <el-form-item label="工作(实习)经历" prop="experience">
+        <el-form-item label="工作(实习)经历" prop="experience" style="display:flex">
           <el-input type="textarea" :autosize="{ minRows: 4, maxRows: 6}" v-model="resumeList.experience "></el-input>
         </el-form-item>
-        <el-form-item label="获奖经历" prop="awards">
+        <el-form-item label="获奖经历" prop="awards" style="display:flex">
           <el-input type="textarea" :autosize="{ minRows: 4, maxRows: 6}" v-model="resumeList.awards"></el-input>
         </el-form-item>
-        <el-form-item>
+        <el-form-item style="display:flex">
           <el-button @click="cancelSubmit">取消</el-button>
           <el-button type="primary" @click="changeResume('resumeInfo')">确定</el-button>
         </el-form-item>
@@ -227,7 +236,7 @@
   }
 
   .mytable {
-    width: 100%;
+    width: 80%;
     margin: 0;
   }
 
@@ -271,12 +280,15 @@
     left: 280px;
   }
 
-  .resumeInfoForm {
-    width: 80%;
-  }
+  /* .resumeInfoForm {
+    width: 60%;
+    
+  } */
   .myDialog {
-    width: 1500px;
+    width: 90%;
   }
+
+  
 </style>
 
 <script>/* eslint-disable indent */
@@ -287,7 +299,7 @@ export default {
   data () {
     var checkname = (rule, value, callback) => {
       if (!value) {
-        return callback(new Error('昵称不能为空'))
+        return callback(new Error('姓名不能为空'))
       } else {
         callback()
       }

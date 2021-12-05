@@ -37,15 +37,7 @@
           <el-button type="primary" class="registerBtn" @click="hrSubmit('hrInfo')">注册</el-button>
         </el-form-item>
       </el-form>
-      <!-- <div class="introduceCompany">
-        <img src="../assets/logo.png" @click="toIndex"/>
-         <p>Job-hunting and recruitment oriented to the Internet,
-           providing more internship and job opportunities
-           From now on, thumb up your life, start with this job.</p>
-      </div>
-      <div class="footer-tip3" @click="toLogin">
-           已有账号?直接登录
-    </div> -->
+      
      <div class="footer-tip3" @click="toLogin">
            已有账号?直接登录
     </div>

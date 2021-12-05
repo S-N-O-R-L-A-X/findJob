@@ -22,7 +22,7 @@ export default {
     return axios.get(api.getUserInfo(), {headers: headers})
   },
   sendCode (phone) {
-    return axios.get(api.sendCode(), {params: {phone: phone}}, {headers: headers})
+    return axios.get('http://1.15.170.222:88/api/service/sms', {params: {phone: phone}}, {headers: headers})
   },
   logout () {
     return axios.get(api.logout(), {headers: headers})
